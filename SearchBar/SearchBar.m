@@ -33,7 +33,7 @@
 }
 - (instancetype)initWithFrame:(CGRect)frame searchBarStretchWidth:(CGFloat)width{
     if(self = [super initWithFrame:frame]){
-        _searchLayer = [[SearchLayer alloc]initWithSuperView:self searchBarStretchDirection:width];
+        _searchLayer = [[SearchLayer alloc]initWithSuperView:self searchBarStretchWidth:width];
         [self.layer addSublayer:_searchLayer];
         
         _searchBarTextField = [[UITextField alloc]init];

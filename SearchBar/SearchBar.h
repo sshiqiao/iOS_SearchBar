@@ -26,6 +26,7 @@
 @property (nonatomic, strong) SearchLayer *searchLayer;
 @property (nonatomic, strong) UITextField *searchBarTextField;
 @property (nonatomic, strong) UIImageView *searchBarClose;
+
 - (instancetype)initWithFrame:(CGRect)frame;
 - (instancetype)initWithFrame:(CGRect)frame searchBarStretchWidth:(CGFloat)width;
 - (instancetype)initWithFrame:(CGRect)frame searchBarStretchDirection:(SearchBarStretchDirection)direction;

@@ -19,24 +19,32 @@
     [self.navigationController setNavigationBarHidden:YES];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
-    SearchBar *searchBar = [[SearchBar alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-100, 50, 50, 50)];
+    //初始化SearchBar 位置大小、searchBarStretchWidth展开宽度
+    SearchBar *searchBar = [[SearchBar alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-100, 50, 50, 50) searchBarStretchWidth:330];
     searchBar.placeholder = @"default searchBar";
     [searchBar.searchBarTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     searchBar.delegate = self;
     [self.view addSubview:searchBar];
     
     
-    
-    SearchBar *searchBar1 = [[SearchBar alloc]initWithFrame:CGRectMake(50, 150, 30, 30) searchBarEdgeColor:GrayColor];
+    //初始化SearchBar 位置大小、searchBarEdgeColor边框颜色
+    SearchBar *searchBar1 = [[SearchBar alloc]initWithFrame:CGRectMake(40, 150, 30, 30) searchBarEdgeColor:GrayColor];
+    //设置展开方向
     [searchBar1 setSearchBarStretchDirection:1];
     searchBar1.placeholder = @"custom searchBar";
     [searchBar1.searchBarTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     searchBar1.delegate = self;
     [self.view addSubview:searchBar1];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+    
+    
+    
+    SearchBar *searchBar2 = [[SearchBar alloc]initWithFrame:CGRectMake(40, 230, 30, 30) searchBarEdgeColor:ColorThemeRed];
+    [searchBar2 setSearchBarStretchDirection:1];
+    searchBar2.placeholder = @"custom searchBar";
+    [searchBar2.searchBarTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    searchBar2.delegate = self;
+    [self.view addSubview:searchBar2];
+    
 }
 
 #pragma searchBar textfield delegate

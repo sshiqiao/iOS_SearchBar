@@ -9,13 +9,12 @@
 #import "SearchLayer.h"
 #import "SearchGestureRecognizer.h"
 #import "SearchBar.h"
-@interface SearchLayer ()<SearchGestureRecognizerDelegate> {
-    SearchBar                   *_searchBar;
-    CAShapeLayer                *_roundedRectShape;
-    CAShapeLayer                *_leftLineShape;
-    CAShapeLayer                *_rightLineShape;
-    CGFloat                      _searchBarHandleHeight;
-}
+@interface SearchLayer ()<SearchGestureRecognizerDelegate>
+@property (nonatomic, strong) SearchBar                   *searchBar;
+@property (nonatomic, strong) CAShapeLayer                *roundedRectShape;
+@property (nonatomic, strong) CAShapeLayer                *leftLineShape;
+@property (nonatomic, strong) CAShapeLayer                *rightLineShape;
+@property (nonatomic, assign) CGFloat                     searchBarHandleHeight;
 @end
 @implementation SearchLayer
 
@@ -170,9 +169,9 @@
 -(void)stretchSearchBarAnimation {
     if(_searchBarStretchDirection == SearchBarStretchLeft){
         [UIView animateWithDuration:0.25 animations:^{
-            _searchBar.frame = CGRectMake(UIViewX(_searchBar)-(_searchBarStretchWidth-UIViewHeight(_searchBar)), UIViewY(_searchBar), _searchBarStretchWidth, UIViewHeight(_searchBar));
+            self.searchBar.frame = CGRectMake(UIViewX(self.searchBar)-(self.searchBarStretchWidth-UIViewHeight(self.searchBar)), UIViewY(self.searchBar), self.searchBarStretchWidth, UIViewHeight(self.searchBar));
         }completion:^(BOOL finished){
-            [_rightLineShape setHidden:NO];
+            [self.rightLineShape setHidden:NO];
             [self fitFrameSize];
             [self setSearchTextFieldFirstResponder];
         }];
@@ -194,7 +193,7 @@
         [CATransaction setAnimationDuration:0.1];
         [CATransaction setCompletionBlock:^{
             [UIView animateWithDuration:0.1 animations:^{
-                _searchBar.frame = CGRectMake(UIViewX(_searchBar)+(_searchBarStretchWidth-UIViewHeight(_searchBar)), UIViewY(_searchBar), UIViewHeight(_searchBar), UIViewHeight(_searchBar));
+                self.searchBar.frame = CGRectMake(UIViewX(self.searchBar)+(self.searchBarStretchWidth-UIViewHeight(self.searchBar)), UIViewY(self.searchBar), UIViewHeight(self.searchBar), UIViewHeight(self.searchBar));
                 [self fitFrameSize];
             }];
         }];
@@ -209,12 +208,12 @@
 -(void)setSearchTextFieldFirstResponder {
     if(_isStretch){
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [_searchBar.searchBarTextField setHidden:NO];
-            if([_searchBar.placeholder isEqualToString:@""]){
-                [_searchBar.searchBarTextField becomeFirstResponder];
+            [self.searchBar.searchBarTextField setHidden:NO];
+            if([self.searchBar.placeholder isEqualToString:@""]){
+                [self.searchBar.searchBarTextField becomeFirstResponder];
             }else{
                 [UIView animateWithDuration:0.25 animations:^{
-                    _searchBar.searchBarTextField.alpha = 1.0;
+                    self.searchBar.searchBarTextField.alpha = 1.0;
                 }];
             }
         });
